@@ -67,7 +67,14 @@ startGameBtn.addEventListener('click', () => {
   } else {
     winner = getWinner(computerChoice);
   }
-
+  //   if(winner === RESULT_DRAW){
+  //     message = message + 'had a draw'
+  //   }else if (winner ===RESULT_PLAYER_WINS){                    replaced with terinary operator below
+  //     message  = message + 'won';
+  //   }
+  //   else{
+  //     message = message + 'lost';
+  //   }
   let message = `You picked ${
     playerChoice || DEFAULT_USER_CHOICE
   }, computer picked ${computerChoice}, therefore you `;
@@ -78,13 +85,31 @@ startGameBtn.addEventListener('click', () => {
     : (message = message + 'lost');
   alert(message);
   gameIsRunning = false;
-
-  //   if(winner === RESULT_DRAW){
-  //     message = message + 'had a draw'
-  //   }else if (winner ===RESULT_PLAYER_WINS){
-  //     message  = message + 'won';
-  //   }
-  //   else{
-  //     message = message + 'lost';
-  //   }
 });
+
+//example && practice of spread, spread alternative and functions within functions, callback functins
+const sumUp = (resultHandler, ...numbers) => {
+  const validateNumber = (number) => {
+    return isNaN(number) ? 0 : number;
+  };
+  let sum = 0;
+  for (const num of numbers) {
+    sum += validateNumber(num);
+  }
+  resultHandler(sum);
+};
+
+const subtractUp = function () {
+  let subtract = 0;
+  for (const num of arguments) {
+    subtract -= num;
+  }
+  return subtract;
+};
+
+const showResult = (result) => {
+  alert('The result is ' + result);
+};
+sumUp(showResult, 1, 2, 6, 7, 8 - 10, 15, 25);
+sumUp(showResult, 1, 2, 6, 7, 8 - 10, 15, 25, 35, 'abcd');
+console.log(subtractUp(1, 5, 15, 20));
